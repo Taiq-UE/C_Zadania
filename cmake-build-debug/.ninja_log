@@ -1,3 +1,5 @@
 # ninja log v5
 3	80	7307370136489827	CMakeFiles/demo2.dir/main.c.obj	eeb51abc10f56523
 81	164	7307370137289009	demo2.exe	7cc39afecc1f8f63
+2	90	7307374823885655	CMakeFiles/demo2.dir/main.c.obj	eeb51abc10f56523
+90	187	7307374824811638	demo2.exe	f651b3bcdb028458
