@@ -28,12 +28,14 @@ void searchBySurname(Contact *contacts, int size, char *surname) {
 }
 
 void deleteBySurname(Contact *contacts, int *size, char *surname) {
-    for(int i = 0; i < *size; i++){
+    for(int i = 0; i < *size;){
         if(strcmp(contacts[i].surname, surname) == 0) {
             for(int j = i; j < *size - 1; j++) {
                 contacts[j] = contacts[j + 1];
             }
             (*size)--;
+        } else {
+            i++;
         }
     }
 }
@@ -45,15 +47,39 @@ int main() {
     contacts[2] = (Contact){"Jurek", "Nowak", "123123123"};
     int size = 3;
     int *sizePtr = &size;
+    int choice;
+    char surname[100];
+    Contact newContact;
 
-    Contact newContact = {"Jan", "Ziomson", "123123999"};
-    addContact(contacts, sizePtr, newContact);
+    while(1) {
+        printf("\n1. Add contact\n2. Display contacts\n3. Search by surname\n4. Delete by surname\n5. Exit\nEnter your choice: ");
+        scanf("%d", &choice);
 
-    //searchBySurname(contacts, size, "Nowak");
-
-    deleteBySurname(contacts, sizePtr, "Nowak");
-
-    displayContacts(contacts, size);
+        switch(choice) {
+            case 1:
+                printf("Enter name, surname and phone number: ");
+                scanf("%s %s %s", newContact.name, newContact.surname, newContact.phoneNumber);
+                addContact(contacts, sizePtr, newContact);
+                break;
+            case 2:
+                displayContacts(contacts, size);
+                break;
+            case 3:
+                printf("Enter surname: ");
+                scanf("%s", surname);
+                searchBySurname(contacts, size, surname);
+                break;
+            case 4:
+                printf("Enter surname: ");
+                scanf("%s", surname);
+                deleteBySurname(contacts, sizePtr, surname);
+                break;
+            case 5:
+                return 0;
+            default:
+                printf("Invalid choice\n");
+        }
+    }
 
     return 0;
 }
