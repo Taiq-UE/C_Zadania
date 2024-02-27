@@ -1,50 +1,59 @@
 #include <stdio.h>
+#include <math.h>
+#include <string.h>
+
+typedef struct {
+    char name[100];
+    char surname[100];
+    char phoneNumber[100];
+}Contact;
+
+void addContact(Contact *contacts, int *size, Contact newContact) {
+    contacts[*size] = newContact;
+    (*size)++;
+}
+
+void displayContacts(Contact *contacts, int size) {
+    for(int i = 0; i < size; i++){
+        printf("%s %s: %s\n", contacts[i].name, contacts[i].surname, contacts[i].phoneNumber);
+    }
+}
+
+void searchBySurname(Contact *contacts, int size, char *surname) {
+    for(int i = 0; i < size; i++){
+        if(strcmp(contacts[i].surname, surname) == 0) {
+            printf("%s %s: %s\n", contacts[i].name, contacts[i].surname, contacts[i].phoneNumber);
+        }
+    }
+}
+
+void deleteBySurname(Contact *contacts, int *size, char *surname) {
+    for(int i = 0; i < *size; i++){
+        if(strcmp(contacts[i].surname, surname) == 0) {
+            for(int j = i; j < *size - 1; j++) {
+                contacts[j] = contacts[j + 1];
+            }
+            (*size)--;
+        }
+    }
+}
 
 int main() {
-    int cont = 1;
-    int p1Wins = 0;
-    int p2Wins = 0;
-    while (cont == 1) {
-        int inp = 0;
-        printf("Player 1 move: \n1. Rock\n2. Paper\n3. Scissors\n");
-        int choice1 = 0;
-        scanf("choice1: %i", inp);
-        printf("Player 2 move: \n1. Rock\n2. Paper\n3. Scissors\n");
-        int choice2 = 0;
-        scanf("choice2: %i", choice2);
+    Contact contacts[100];
+    contacts[0] = (Contact){"Romek", "Kowalski", "123456789"};
+    contacts[1] = (Contact){"Andrzej", "Nowak", "987654321"};
+    contacts[2] = (Contact){"Jurek", "Nowak", "123123123"};
+    int size = 3;
+    int *sizePtr = &size;
 
-        if (choice1 == 1 && choice2 == 2) {
-            printf("Player 2 wins\n");
-            p2Wins++;
-        }
-        else if (choice1 == 2 && choice2 == 3) {
-            printf("Player 2 wins\n");
-            p2Wins++;
-        }
-        else if (choice1 == 3 && choice2 == 1) {
-            printf("Player 2 wins\n");
-            p2Wins++;
-        }
-        else if (choice1 == 1 && choice2 == 3) {
-            printf("Player 1 wins\n");
-            p1Wins++;
-        }
-        else if (choice1 == 2 && choice2 == 1) {
-            printf("Player 1 wins\n");
-            p1Wins++;
-        }
-        else if (choice1 == 3 && choice2 == 2) {
-            printf("Player 1 wins\n");
-            p1Wins++;
-        }
-        else {
-            printf("Tie\n");
-        }
+    Contact newContact = {"Jan", "Ziomson", "123123999"};
+    addContact(contacts, sizePtr, newContact);
 
+    //searchBySurname(contacts, size, "Nowak");
 
+    deleteBySurname(contacts, sizePtr, "Nowak");
 
-    }
-
+    displayContacts(contacts, size);
 
     return 0;
 }
