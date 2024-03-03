@@ -1,5 +1,7 @@
 #include <stdio.h>
-#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
 
 typedef struct {
     char name[100];
@@ -19,18 +21,27 @@ void sortStudents(student students[], int size){
 }
 
 int main() {
+    int studentCount = 500;
 
-    student students[3];
-    students[0] = (student){"Romek", 3.5};
-    students[1] = (student){"Andrzej", 4.5};
-    students[2] = (student){"Jurek", 4.6};
+    srand(time(0));
 
-    sortStudents(students, 3);
+    student students[studentCount];
 
-    for(int i = 0; i < 3; i++){
-        printf("%s: %.2f\n", students[i].name, students[i].mark);
+    for(int i = 0; i < studentCount; i++){
+        char name[studentCount];
+        sprintf(name, "Student%d", i+1);
+
+        float mark = 2.0 + (rand() / (float)RAND_MAX) * 3.0;
+
+        strcpy(students[i].name, name);
+        students[i].mark = mark;
+    }
+
+    sortStudents(students, studentCount);
+
+    for(int i = 0; i < studentCount; i++){
+        printf("%s : %f\n", students[i].name, students[i].mark);
     }
 
     return 0;
 }
-
