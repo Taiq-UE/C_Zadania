@@ -21,7 +21,7 @@ void sortStudents(student students[], int size){
 }
 
 int main() {
-    int studentCount = 500;
+    const int studentCount = 200;
 
     srand(time(0));
 
