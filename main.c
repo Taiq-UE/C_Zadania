@@ -11,12 +11,14 @@ int main() {
     scanf("%d", &cols);
 
     int **matrix = (int **)malloc(rows * sizeof(int *));
+    // Pętla do alokacji pamięci dla każdego wiersza macierzy
     for (int i = 0; i < rows; i++) {
         matrix[i] = (int *)malloc(cols * sizeof(int));
     }
 
     srand(time(0));
 
+    // Pętla do wypełnienia macierzy losowymi liczbami od 0 do 9
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             matrix[i][j] = rand() % 10;
@@ -24,6 +26,7 @@ int main() {
     }
 
     printf("Matrix:\n");
+    // Pętla do wydrukowania zawartości macierzy
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             printf("%d ", matrix[i][j]);
