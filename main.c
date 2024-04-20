@@ -1,44 +1,52 @@
 #include <stdio.h>
+#include <string.h>
 
-int add(int a, int b) {
-    return a + b;
-}
-
-int multiply(int a, int b) {
-    return a * b;
-}
-
-int subtract(int a, int b) {
-    return a - b;
+int wordToDigit(char *word) {
+    if (strcmp(word, "zero") == 0) return 0;
+    if (strcmp(word, "one") == 0) return 1;
+    if (strcmp(word, "two") == 0) return 2;
+    if (strcmp(word, "three") == 0) return 3;
+    if (strcmp(word, "four") == 0) return 4;
+    if (strcmp(word, "five") == 0) return 5;
+    if (strcmp(word, "six") == 0) return 6;
+    if (strcmp(word, "seven") == 0) return 7;
+    if (strcmp(word, "eight") == 0) return 8;
+    if (strcmp(word, "nine") == 0) return 9;
+    return -1;
 }
 
 int main() {
-    int (*operation)(int, int);
+    FILE *input = fopen("C:\\Users\\kamil\\CLionProjects\\demo2\\files\\input.txt", "r");
+    FILE *output = fopen("C:\\Users\\kamil\\CLionProjects\\demo2\\files\\result.txt", "w");
 
-    int num1, num2, choice;
-    printf("Enter two numbers: ");
-    scanf("%d %d", &num1, &num2);
+    char line[256];
+    while (fgets(line, sizeof(line), input)) {
+        char word[256] = "";
+        int firstDigit = -1, lastDigit = -1;
 
-    printf("Choose: 1Add, 2.Multiply, 3.Subtract: ");
-    scanf("%d", &choice);
+        for (int i = 0; line[i] != '\0'; i++) {
+            if (line[i] >= '0' && line[i] <= '9') {
+                if (firstDigit == -1) firstDigit = line[i] - '0';
+                lastDigit = line[i] - '0';
+                word[0] = '\0'; // Resetuj słowo
+            } else if (line[i] >= 'a' && line[i] <= 'z') {
+                strncat(word, &line[i], 1); // Dodaj znak do słowa
+                int digit = wordToDigit(word);
+                if (digit != -1) {
+                    if (firstDigit == -1) firstDigit = digit;
+                    lastDigit = digit;
+                    word[0] = '\0'; // Resetuj słowo
+                }
+            }
+        }
 
-    switch(choice) {
-        case 1:
-            operation = add;
-            break;
-        case 2:
-            operation = multiply;
-            break;
-        case 3:
-            operation = subtract;
-            break;
-        default:
-            printf("Invalid choice!\n");
-            return 1;
+        if (firstDigit != -1 && lastDigit != -1) {
+            fprintf(output, "%d%d\n", firstDigit, lastDigit); // Zapisz do pliku wynikowego
+        }
     }
 
-    int result = operation(num1, num2);
-    printf("Result: %d\n", result);
+    fclose(input);
+    fclose(output);
 
     return 0;
 }
