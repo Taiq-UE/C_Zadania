@@ -7,6 +7,7 @@
 #define MAX_BLUE 14
 
 int main() {
+    //nie działają ścieżki względne
     FILE *input = fopen("C:\\Users\\kamil\\CLionProjects\\C_Zadania\\files\\input2.txt", "r");
     if (input == NULL) {
         printf("Cant open file\n");
