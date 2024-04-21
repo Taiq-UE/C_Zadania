@@ -18,8 +18,8 @@ WordToDigitResult wordToDigit(char *word) {
 
 int main() {
     //nie działają ścieżki względne
-    FILE *input = fopen("C:\\Users\\kamil\\CLionProjects\\C_Zadania\\files\\input.txt", "r");
-    FILE *output = fopen("C:\\Users\\kamil\\CLionProjects\\C_Zadania\\files\\result.txt", "w");
+    FILE *input = fopen("C:\\Users\\kamil\\CLionProjects\\C_Zadania\\_Zadania_7\\files\\input.txt", "r");
+    FILE *output = fopen("C:\\Users\\kamil\\CLionProjects\\C_Zadania\\_Zadania_7\\files\\result.txt", "w");
 
     char line[256];
     while (fgets(line, sizeof(line), input)) {

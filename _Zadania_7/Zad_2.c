@@ -8,7 +8,7 @@
 
 int main() {
     //nie działają ścieżki względne
-    FILE *input = fopen("C:\\Users\\kamil\\CLionProjects\\C_Zadania\\files\\input2.txt", "r");
+    FILE *input = fopen("C:\\Users\\kamil\\CLionProjects\\C_Zadania\\_Zadania_7\\files\\input2.txt", "r");
     if (input == NULL) {
         printf("Cant open file\n");
         return 1;
@@ -92,6 +92,6 @@ int main() {
 
     fclose(input);
     printf("\n\nSum of mins power: %d\n", sum_mins_power);
-    printf("Sum: %d\n", sum_game_ids);
+    printf("Sum of IDs: %d\n", sum_game_ids);
     return 0;
 }
