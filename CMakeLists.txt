@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.27)
-project(demo2 C)
+project(demo2 CXX)
 
-set(CMAKE_C_STANDARD 17)
+set(CMAKE_CXX_STANDARD 17)
 
-add_executable(demo2 main.c
-)
+add_executable(demo2 main.cpp)
